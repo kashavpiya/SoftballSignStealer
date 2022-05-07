@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="css/style.css" rel="stylesheet">
+    <title>Softball Sign Stealer</title>
+</head>
+
+<body>
+    <section id="container">
+
+        <header class="header">
+            <h1 class="logo"> Softball Sign Stealer</h1>
+        </header>
+
+        <section id="content">
+            <section class="wrapper">
+                <div class="row">
+                    <div class="col-manage">
+                        <div class="info-box orange-bg">
+                            <div class="count" id="sequence"></div>
+                            <div class="title">Sequence</div>
+                        </div>
+                    </div>
+                    <div class="col-manage2">
+                        <div class="info-box blue-bg">
+                            <div class="count" id="pred">Not Steal</div>
+                            <div class="title" id="found">Prediction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-manage3">
+                        <div class="info-box yellow-bg">
+                            <div class="btn" onclick="AddElement('A')">
+                                <div class="count">A</div>
+                                <div class="title" id="titleA"></div>
+                            </div>
+                            <div class="btn" onclick="AddElement('D')">
+                                <div class="count">D</div>
+                                <div class="title" id="titleD"></div>
+                            </div>
+                            <div class="btn" onclick="AddElement('E')">
+                                <div class="count">E</div>
+                                <div class="title" id="titleE"></div>
+                            </div>
+                            <div class="btn" onclick="AddElement('F')">
+                                <div class="count">F</div>
+                                <div class="title" id="titleF"></div>
+                            </div>
+                            <div class="btn" onclick="AddElement('G')">
+                                <div class="count">G</div>
+                                <div class="title" id="titleG"></div>
+                            </div>
+                            <div class="btn" onclick="AddElement('J')">
+                                <div class="count">J</div>
+                                <div class="title" id="titleJ"></div>
+                            </div>
+                            <div class="btn" onclick="Backspace()">
+                                <div class="count"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-manage4">
+                        <div class="info-box green-bg">
+                            <div class="btn" onclick="Label(1)">
+                                <div class="count">Steal</div>
+                            </div>
+                            <div class="btn" onclick="Label(0)">
+                                <div class="count">Not Steal</div>
+                            </div>
+                            <div class="btn" onclick="Encode()">
+                                <div class="count">Encode</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-body hide" id="encDiv">
+                    <form class="form-horizontal " method="get">
+                        <center>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">A</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="What does A represent?"
+                                        id="pA">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">D</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="What does D represent?"
+                                        id="pD">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">E</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="What does E represent?"
+                                        id="pE">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">F</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="What does F represent?"
+                                        id="pF">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">G</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="What does G represent?"
+                                        id="pG">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">J</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="What does J represent?"
+                                        id="pJ">
+                                </div>
+                            </div>
+
+
+
+                            <div class="panel-body" onclick="Encode()"><a class="btn btn-warning">Apply</a></div>
+                        </center>
+
+
+                    </form>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="info-box blue-bg">
+                        <center>
+                          <div class="panel-body" onclick="ClearLast()"><a class="btn btn-warning">Clear Last</a>
+                            <span onclick="ClearAll()"><a class="btn btn-warning">Clear All</a>
+                          </div>
+                        </center>
+          
+                        <div class="count">Dataset</div>
+                        <div class="pad">
+                          <div class="count" id="dataD"></div>
+                        </div>
+                        <div class="pad">
+                          <div class="count" id="dataL"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+            </section>
+        </section>
+    </section>
+
+    <script>
+        var dataset = [];
+    var dict = {
+      'ae': 0,
+      'aa': 0,
+      'ad': 0,
+      'af': 0,
+      'ag': 0,
+      'aj': 0,
+      'ee': 0,
+      'ea': 0,
+      'ed': 0,
+      'ef': 0,
+      'eg': 0,
+      'ej': 0,
+      'de': 0,
+      'da': 0,
+      'dd': 0,
+      'df': 0,
+      'dg': 0,
+      'dj': 0,
+      'fe': 0,
+      'fa': 0,
+      'fd': 0,
+      'ff': 0,
+      'fg': 0,
+      'fj': 0,
+      'ge': 0,
+      'ga': 0,
+      'gd': 0,
+      'gf': 0,
+      'gg': 0,
+      'gj': 0,
+      'je': 0,
+      'ja': 0,
+      'jd': 0,
+      'jf': 0,
+      'jg': 0,
+      'jj': 0
+    };
+    var steal = "aa";
+    var encoding = false;
+
+    function ResetDict(d) {
+      for (var key in d) {
+        d[key] = 0;
+      }
+
+      return d;
+    }
+
+    function Encode() {
+      encoding = encoding == false ? true : false;
+
+      if (encoding) {
+        document.getElementById("encDiv").classList.remove('hide');
+      } else {
+        document.getElementById("encDiv").classList.add('hide');
+        document.getElementById("titleA").innerHTML = document.getElementById("pA").value;
+        document.getElementById("titleD").innerHTML = document.getElementById("pD").value;
+        document.getElementById("titleE").innerHTML = document.getElementById("pE").value;
+        document.getElementById("titleF").innerHTML = document.getElementById("pF").value;
+        document.getElementById("titleG").innerHTML = document.getElementById("pG").value;
+        document.getElementById("titleJ").innerHTML = document.getElementById("pJ").value;
+      }
+    }
+
+    function AddElement(e) {
+      seq = document.getElementById("sequence");
+      seq.innerHTML += e;
+
+      ss = seq.innerHTML.toLowerCase();
+
+      dict = ResetDict(dict);
+
+      for (i = 0; i < ss.length - 1; i++) {
+        corr = `${ss[i] + ss[i + 1]}`;
+        dict[corr] += 1;
+      }
+
+      CheckSeq();
+
+    }
+
+    function ClearAll() {
+      dataD = document.getElementById("dataD");
+      dataL = document.getElementById("dataL");
+      dataD.innerHTML = ``;
+      dataL.innerHTML = ``;
+      dataset = [];
+
+      FindSteal();
+      CheckSeq();
+    }
+
+    function ClearLast() {
+      dataD = document.getElementById("dataD");
+      dataL = document.getElementById("dataL");
+
+      lastD = dataD.innerHTML.split('<br>');
+      lastL = dataL.innerHTML.split('<br>');
+
+      dataD.innerHTML = ''
+      dataL.innerHTML = ''
+
+      // Reconfigure the inners without last element
+      for (i = 0; i < lastD.length - 2; i++) {
+        dataD.innerHTML += lastD[i] + '<br>';
+        dataL.innerHTML += lastL[i] + '<br>';
+      }
+
+      dataset.pop();
+
+      FindSteal();
+      CheckSeq();
+    }
+
+    function Label(l) {
+      seq = document.getElementById("sequence").innerHTML.toLowerCase();
+
+      if (seq.length >= 2) {
+        dataD = document.getElementById("dataD");
+        dataL = document.getElementById("dataL");
+
+        dataset.push([seq, l]);
+
+        d = dataset[dataset.length - 1][0];
+        l = dataset[dataset.length - 1][1];
+
+        dataD.innerHTML += `${d}<br>`;
+        dataL.innerHTML += `${l}<br>`;
+
+        FindSteal();
+
+        Clear();
+      }
+    }
+
+    function FindSteal() {
+      let top = Object.assign({}, dict);
+
+      top = ResetDict(top);
+
+      for (i = 0; i < dataset.length; i++) {
+        temp = [];
+        for (j = 0; j < dataset[i][0].length - 1; j++) {
+
+
+          corr = `${dataset[i][0][j] + dataset[i][0][j + 1]}`;
+
+          if (!temp.includes(corr)) {
+            top[corr] += dataset[i][1] == 1 ? 1 : -1;
+          }
+
+          temp.push(corr);
+        }
+      }
+
+      // Create items array
+      var items = Object.keys(top).map(function (key) {
+        return [key, top[key]];
+      });
+
+      // Sort the array based on the second element
+      items.sort(function (first, second) {
+        return second[1] - first[1];
+      });
+
+      steal = items[0][0];
+
+      found = document.getElementById("found");
+
+      if (dataset.length > 0) {
+        found.innerHTML = `Prediction: ${steal}`;
+      }
+      else {
+        found.innerHTML = `Prediction`;
+      }
+    }
+
+    function CheckSeq() {
+
+      if (dataset.length > 0) {
+
+        if (dict[steal] >= 1) {
+          ChangePred(1);
+        } else {
+          ChangePred(0);
+        }
+      } else {
+        ChangePred(0);
+      }
+    }
+
+    function ChangePred(v) {
+      if (v == 1 && dataset.length > 0) {
+        document.getElementById("stealer").classList.remove('gray-bg');
+        document.getElementById("stealer").classList.add('red-bg');
+        document.getElementById("pred").innerHTML = "Steal";
+      } else {
+        document.getElementById("stealer").classList.remove('red-bg');
+        document.getElementById("stealer").classList.add('gray-bg');
+        document.getElementById("pred").innerHTML = "Not Steal";
+      }
+
+    }
+
+    function Backspace() {
+      seq = document.getElementById("sequence");
+
+      ss = seq.innerHTML;
+
+      corr = `${ss[ss.length - 2] + ss[ss.length - 1]}`.toLowerCase();
+      dict[corr] -= 1;
+
+      console.log(dict[corr]);
+
+      seq.innerHTML = seq.innerHTML.replace(/.$/, '');
+      CheckSeq();
+    }
+
+    function Clear(e) {
+      seq = document.getElementById("sequence");
+      seq.innerHTML = "";
+      CheckSeq();
+    }
+    </script>
+</body>
+
+</html>
