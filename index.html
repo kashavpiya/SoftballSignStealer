@@ -3,6 +3,8 @@
 
 <head>
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/xcharts.min.css" rel=" stylesheet">
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
     <title>Softball Sign Stealer</title>
 </head>
 
@@ -17,13 +19,13 @@
             <section class="wrapper">
                 <div class="row">
                     <div class="col-manage">
-                        <div class="info-box orange-bg">
+                        <div class="info-box yellow-bg">
                             <div class="count" id="sequence"></div>
                             <div class="title">Sequence</div>
                         </div>
                     </div>
                     <div class="col-manage2">
-                        <div class="info-box blue-bg">
+                        <div class="info-box gray-bg" id="stealer">
                             <div class="count" id="pred">Not Steal</div>
                             <div class="title" id="found">Prediction</div>
                         </div>
@@ -32,7 +34,7 @@
 
                 <div class="row">
                     <div class="col-manage3">
-                        <div class="info-box yellow-bg">
+                        <div class="info-box blue-bg">
                             <div class="btn" onclick="AddElement('A')">
                                 <div class="count">A</div>
                                 <div class="title" id="titleA"></div>
@@ -86,43 +88,37 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">A</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="What does A represent?"
-                                        id="pA">
+                                    <input type="text" class="form-control" placeholder="What does A represent?" id="pA">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">D</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="What does D represent?"
-                                        id="pD">
+                                    <input type="text" class="form-control" placeholder="What does D represent?" id="pD">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">E</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="What does E represent?"
-                                        id="pE">
+                                    <input type="text" class="form-control" placeholder="What does E represent?" id="pE">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">F</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="What does F represent?"
-                                        id="pF">
+                                    <input type="text" class="form-control" placeholder="What does F represent?" id="pF">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">G</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="What does G represent?"
-                                        id="pG">
+                                    <input type="text" class="form-control" placeholder="What does G represent?" id="pG">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">J</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="What does J represent?"
-                                        id="pJ">
+                                    <input type="text" class="form-control" placeholder="What does J represent?" id="pJ">
                                 </div>
                             </div>
 
@@ -137,10 +133,10 @@
 
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <div class="info-box blue-bg">
-                        <center>
-                          <div class="panel-body" onclick="ClearLast()"><a class="btn btn-warning">Clear Last</a>
-                            <span onclick="ClearAll()"><a class="btn btn-warning">Clear All</a>
+                        <div class="info-box blue-bg">
+                            <center>
+                                <div class="panel-body" onclick="ClearLast()"><a class="btn btn-warning">Clear Last</a>
+                                    <span onclick="ClearAll()"><a class="btn btn-warning">Clear All</a>
                           </div>
                         </center>
           
@@ -199,7 +195,7 @@
       'jg': 0,
       'jj': 0
     };
-    var steal = "aa";
+    var steal = "aj";
     var encoding = false;
 
     function ResetDict(d) {
